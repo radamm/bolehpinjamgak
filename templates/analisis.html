@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Pinjaman</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <h1>BolehPinjamGak</h1>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/simulasi">Simulasi</a></li>
+                    <li><a href="/analisis" class="active">Analisis</a></li>
+                    <li><a href="/tentang">Tentang</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Form Analisis -->
+    <section class="section simulasi">
+        <div class="container">
+            <h2 class="section-title">Analisis Cicilan Pinjaman</h2>
+            <form id="analysisForm">
+                <!-- Slider Jumlah Pinjaman -->
+                <label>Jumlah Pinjaman: <span id="loanAmountValue">10 Juta</span></label>
+                <input type="range" id="loanAmount" min="600000" max="50000000" step="100000" value="10000000" oninput="updateValues()">
+
+                <!-- Slider Lama Pinjaman -->
+                <label>Lama Pinjaman: <span id="loanTenorValue">12 Bulan</span></label>
+                <input type="range" id="loanTenor" min="2" max="24" step="1" value="12" oninput="updateValues()">
+
+                <!-- Dropdown Layanan Kredit -->
+                <label>Pilih Layanan Kredit:</label>
+                <select id="loanProvider" onchange="updateValues()">
+                    <option value="Gopaylater">Gopaylater (41%)</option>
+                    <option value="Shopee">Shopee (48%)</option>
+                    <option value="Uangme">Uangme (39%)</option>
+                    <option value="KreditPintar">Kredit Pintar (44%)</option>
+                    <option value="Julo">Julo (24%)</option>
+                </select>
+            </form>
+
+            <!-- Output Cicilan -->
+            <div id="result-section" style="margin-top: 20px;">
+                <h3>Cicilan per Bulan</h3>
+                <p id="monthlyInstallment" class="result-box">Rp 0</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Data bunga per tahun dari layanan kredit
+        const interestRates = {
+            Gopaylater: 0.41,
+            Shopee: 0.48,
+            Uangme: 0.39,
+            KreditPintar: 0.44,
+            Julo: 0.24
+        };
+
+        // Fungsi menghitung bunga dan cicilan
+        function calculateInstallment() {
+            const loanAmount = parseFloat(document.getElementById("loanAmount").value);
+            const loanTenor = parseInt(document.getElementById("loanTenor").value);
+            const loanProvider = document.getElementById("loanProvider").value;
+
+            // Hitung bunga per bulan
+            let annualInterestRate = interestRates[loanProvider];
+            let monthlyInterestRate = annualInterestRate / 12;
+
+            // Diskon 1% jika tenor ≤ 6 bulan
+            if (loanTenor <= 6) {
+                monthlyInterestRate -= 0.01;
+            }
+
+            // Hitung total pembayaran dan cicilan per bulan
+            const totalPayment = loanAmount * (1 + monthlyInterestRate * loanTenor);
+            const installment = totalPayment / loanTenor;
+
+            // Format hasil ke ID monthlyInstallment
+            document.getElementById("monthlyInstallment").innerText = "Rp " + installment.toLocaleString('id-ID', { minimumFractionDigits: 0 });
+        }
+
+        // Fungsi update nilai slider
+        function updateValues() {
+            const loanAmount = parseFloat(document.getElementById("loanAmount").value);
+            const loanTenor = parseInt(document.getElementById("loanTenor").value);
+
+            document.getElementById("loanAmountValue").innerText = (loanAmount / 1000000).toFixed(1) + " Juta";
+            document.getElementById("loanTenorValue").innerText = loanTenor + " Bulan";
+
+            calculateInstallment();
+        }
+
+        // Hitung cicilan saat halaman dimuat
+        window.onload = updateValues;
+    </script>
+</body>
+</html>

@@ -1,0 +1,461 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #111;
+    color: #fff;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+/* Header Navigasi */
+.site-header {
+    background-color: #181818; /* Warna latar header */
+    color: #fff; /* Warna teks */
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Header tetap di atas saat scroll */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, #A46CE6, #42A5F5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #42A5F5; /* Warna saat di-hover */
+}
+
+/* Responsif Header */
+@media (max-width: 768px) {
+    .site-header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Button Styles */
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 50px; /* Maximal border radius */
+    background: linear-gradient(90deg, #42A5F5, #A46CE6);
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    transition: 0.3s ease;
+    margin-top: 20px; /* Added margin to separate buttons */
+}
+
+.cta-button:hover {
+    background: linear-gradient(90deg, #A46CE6, #42A5F5);
+}
+
+/* Header Section */
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+    background-color: #181818;
+}
+
+.header-content {
+    flex: 1 1 50%;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 3rem;
+    background: linear-gradient(90deg, #A46CE6, #42A5F5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.header-description {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.header-image {
+    flex: 1 1 50%;
+    text-align: center;
+}
+
+/* Gaya untuk gambar header */
+.header-image img {
+    width: 100%; /* Pastikan gambar responsif */
+    max-width: 400px; /* Maksimal lebar gambar */
+    border-radius: 20px; /* Membuat sudut gambar melengkung */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Efek bayangan halus */
+    object-fit: cover; /* Menjaga aspek rasio gambar */
+    transition: transform 0.3s ease-in-out; /* Efek transisi saat hover */
+}
+
+.header-image img:hover {
+    transform: scale(1.05); /* Sedikit memperbesar gambar saat di-hover */
+}
+
+
+/* Section Styles */
+.section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #42A5F5;
+}
+
+.section-content {
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+/* Styling for feature icons */
+.feature-icon {
+    font-size: 2.5rem; /* Ukuran ikon */
+    color: #42A5F5; /* Warna ikon */
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+/* Simulasi Cicilan Section */
+.simulasi-cicilan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.simulasi-content {
+    flex: 1 1 50%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.simulasi-item {
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.simulasi-item h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #A46CE6;
+}
+
+.simulasi-item p {
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.simulasi-image {
+    flex: 1 1 50%;
+    text-align: center;
+}
+
+/* Gaya interaktif untuk gambar simulasi */
+.simulasi-image img {
+    width: 100%; /* Pastikan gambar mengisi kontainer */
+    max-width: 400px; /* Lebar maksimum gambar */
+    border-radius: 15px; /* Membuat sudut gambar melengkung */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Efek bayangan lembut */
+    object-fit: cover; /* Menjaga aspek rasio gambar */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi halus */
+}
+
+/* Efek hover untuk gambar */
+.simulasi-image img:hover {
+    transform: scale(1.05); /* Zoom in lembut saat di-hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Bayangan lebih tegas saat hover */
+}
+
+
+/* Feature Boxes */
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.feature {
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    flex: 1 1 calc(25% - 20px);
+    min-width: 250px;
+}
+
+.feature-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #A46CE6;
+}
+
+.feature-description {
+    font-size: 0.9rem;
+}
+
+/* Steps */
+.steps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-left: 20px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.step-number {
+    background: #A46CE6;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-content {
+        text-align: center;
+    }
+
+    .features {
+        flex-direction: column;
+    }
+
+    .step {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* */
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #111;
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* Header Navigasi */
+.site-header {
+    background-color: #181818;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, #A46CE6, #42A5F5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover, .nav-menu a.active {
+    color: #42A5F5;
+}
+
+/* Simulasi Section */
+.simulasi {
+    padding: 50px 0;
+    background: #181818;
+}
+
+.simulasi-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+    align-items: center;
+}
+
+.form-section {
+    flex: 1;
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #42A5F5;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: 600;
+    color: #ccc;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #333;
+    color: #fff;
+    font-size: 1rem;
+}
+
+button.cta-button {
+    background: linear-gradient(90deg, #42A5F5, #A46CE6);
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+button.cta-button:hover {
+    background: linear-gradient(90deg, #A46CE6, #42A5F5);
+}
+
+.image-section {
+    flex: 1;
+    text-align: center;
+}
+
+.image-section img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+/* Kotak untuk hasil prediksi */
+.result-box {
+    margin: 20px 0;
+    padding: 15px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Warna hijau untuk layak pinjam */
+.result-box.layak {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+/* Warna merah untuk tidak layak pinjam */
+.result-box.tidak-layak {
+    color: #dc3545;
+    border-color: #dc3545;
+}

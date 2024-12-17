@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - BolehPinjamGak</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" defer></script>
+    <link rel="stylesheet" href="../static/styles.css">
+    <style>
+        .about-section {
+            padding: 50px 0;
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #42A5F5;
+        }
+
+        .about-section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin: 0 auto 30px;
+            max-width: 800px;
+        }
+
+        /* Team Section */
+        .team-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .team-box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 250px; /* Ukuran box tetap */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        /* Efek hover serentak */
+        .team-container:hover .team-box {
+            transform: scale(1.05); /* Membesarkan semua box */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-container .team-box:hover {
+            transform: scale(1.05); /* Konsisten dengan parent hover */
+        }
+
+        .team-box img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; /* Awalnya lingkaran */
+            transition: transform 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+        }
+
+        .team-container:hover .team-box img {
+            border-radius: 10px; /* Mengubah lingkaran menjadi persegi */
+        }
+
+        .team-box h3 {
+            font-size: 1.2rem;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .team-box p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+
+
+        .features-section {
+        padding: 50px 0;
+        background-color: #f9f9f9;
+        text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #42A5F5;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-box {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #42A5F5;
+            margin-bottom: 15px;
+        }
+
+        .feature-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .feature-box p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <h1>BolehPinjamGak</h1>
+            </div>            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/simulasi">Simulasi</a></li>
+                    <li><a href="/analisis">Analisis</a></li>
+                    <li><a href="/tentang" class="active">Tentang</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Tentang Kami Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2>Tentang Kami</h2>
+            <p>
+                Selamat datang di <strong>BolehPinjamGak?</strong>, platform inovatif berbasis Machine Learning yang dirancang untuk membantu Anda dalam mengevaluasi kelayakan pinjaman secara cepat, akurat, dan mudah.
+            </p>
+            <p>
+                Dengan perkembangan teknologi keuangan yang pesat, kami memahami pentingnya sistem penilaian kredit yang transparan dan efisien. Oleh karena itu, <strong>BolehPinjamGak?</strong> hadir untuk memberikan solusi modern bagi individu dan lembaga keuangan dalam pengambilan keputusan pinjaman.
+            </p>
+    </section>
+    <!-- Apa yang Kami Tawarkan -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Apa yang Kami Tawarkan?</h2>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <i class="fa-solid fa-chart-line feature-icon"></i>
+                    <h3>Prediksi Kelayakan Pinjaman</h3>
+                    <p>Menggunakan algoritma Random Forest untuk memproses data usia, pendapatan, dan tujuan pinjaman secara objektif.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-calculator feature-icon"></i>
+                    <h3>Simulasi Kemampuan Bayar</h3>
+                    <p>Fitur simulasi cicilan berbasis pendapatan dan tenor pinjaman untuk merencanakan keuangan dengan bijak.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-file-pdf feature-icon"></i>
+                    <h3>Dokumen Pendukung</h3>
+                    <p>Hasil analisis dapat dicetak dalam format PDF untuk mempermudah proses pengajuan pinjaman.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Mengapa Memilih Kami -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Mengapa Memilih BolehPinjamGak?</h2>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <i class="fa-solid fa-clock feature-icon"></i>
+                    <h3>Cepat & Akurat</h3>
+                    <p>Hasil prediksi tersedia dalam hitungan detik, membantu Anda mengambil keputusan cepat.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-shield-halved feature-icon"></i>
+                    <h3>Teknologi Terpercaya</h3>
+                    <p>Menggunakan model Machine Learning yang andal dan telah teruji untuk penilaian akurat.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-user feature-icon"></i>
+                    <h3>User-Friendly</h3>
+                    <p>Antarmuka sederhana dan mudah digunakan oleh semua kalangan tanpa hambatan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Tentang Kami Section -->
+    <section class="about-section">
+        <div class="container">
+            <!-- Tambahan Bagian Penutup -->
+            <p>
+                Kami percaya bahwa setiap individu berhak mendapatkan kesempatan yang adil untuk memenuhi kebutuhan finansial mereka. Dengan <strong>BolehPinjamGak?</strong>, mari bersama menciptakan masa depan keuangan yang lebih cerah dan terstruktur.
+            </p>
+            <p>
+                <strong>BolehPinjamGak? – Solusi Cerdas untuk Penilaian Pinjaman Anda</strong>
+            </p>
+        </div>
+    </section>
+
+
+    <!-- Team Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2>Tim Pengelola</h2>
+            <div class="team-container">
+                <div class="team-box">
+                    <img src="https://res.cloudinary.com/dzzt9x1xm/image/upload/v1734451437/hoga_2024-12-14_045517.907_n8mftj.jpg" alt="Foto Pengelola">
+                    <h3>Radam Gumelar</h3>
+                    <p>NIM: 164231032</p>
+                </div>
+                <div class="team-box">
+                    <img src="https://res.cloudinary.com/dzzt9x1xm/image/upload/v1734451437/IMG_20240921_120423_u4uhdu.jpg" alt="Foto Pengelola">
+                    <h3>Mirza Muhyidin</h3>
+                    <p>NIM: 164231060</p>
+                </div>
+                <div class="team-box">
+                    <img src="https://res.cloudinary.com/dzzt9x1xm/image/upload/v1734451435/WhatsApp_Image_2024-12-17_at_22.53.45_837cd91e_kt9pyn.jpg" alt="Foto Pengelola">
+                    <h3>Ghaly Anargya A.R.N.</h3>
+                    <p>NIM: 164231069</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Pinjaman - BolehPinjamGak</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <h1>BolehPinjamGak</h1>
+            </div>            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/simulasi" class="active">Simulasi</a></li>
+                    <li><a href="/analisis">Analisis</a></li>
+                    <li><a href="/tentang">Tentang</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Simulasi Form Section -->
+    <section class="section simulasi">
+        <div class="container">
+            <div class="form-section">
+                <h2>Prediksi Kelayakan Pinjaman</h2>
+                <form id="loanForm">
+                    <label>Nama:</label>
+                    <input type="text" id="person_name" placeholder="Masukkan Nama Anda" required>
+
+                    <label>Usia:</label>
+                    <input type="number" id="person_age" required>
+
+                    <label>Pendapatan Tahunan:</label>
+                    <input type="number" id="person_income" required>
+
+                    <label>Status Rumah:</label>
+                    <select id="person_home_ownership" required>
+                        <option value="OWN">Miliki</option>
+                        <option value="RENT">Sewa</option>
+                        <option value="OTHER">Lainnya</option>
+                    </select>
+
+                    <label>Lama Bekerja (tahun):</label>
+                    <input type="number" id="person_emp_length" step="0.1" required>
+
+                    <label>Tujuan Pinjaman:</label>
+                    <select id="loan_intent" required>
+                        <option value="EDUCATION">Pendidikan</option>
+                        <option value="HOMEIMPROVEMENT">Perbaikan Rumah</option>
+                        <option value="MEDICAL">Medis</option>
+                        <option value="PERSONAL">Pribadi</option>
+                        <option value="VENTURE">Usaha</option>
+                    </select>
+
+                    <label>Jumlah Pinjaman:</label>
+                    <input type="number" id="loan_amnt" required>
+
+                    <button type="submit" class="cta-button">Prediksi Sekarang</button>
+                </form>
+            </div>
+
+            <!-- Hasil Prediksi -->
+            <div id="result-section" style="display:none;">
+                <h2>Hasil Prediksi</h2>
+                <div id="prediction-result" class="result-box"></div>
+                <p id="reason-text"></p>
+                <p id="suggestion-text"></p>
+                <button onclick="generatePDF()" class="cta-button">Cetak Hasil</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        async function fetchPrediction(event) {
+            event.preventDefault();
+
+            // Ambil data input dari formulir
+            const data = {
+                person_name: document.getElementById('person_name').value,
+                person_age: document.getElementById('person_age').value,
+                person_income: document.getElementById('person_income').value,
+                person_home_ownership: document.getElementById('person_home_ownership').value,
+                person_emp_length: document.getElementById('person_emp_length').value,
+                loan_intent: document.getElementById('loan_intent').value,
+                loan_amnt: document.getElementById('loan_amnt').value
+            };
+
+            // Kirim data ke server Flask
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            // Tampilkan hasil prediksi
+            const resultBox = document.getElementById('prediction-result');
+            if (result.prediction === "Layak Pinjam") {
+                resultBox.textContent = "✅ " + result.prediction;
+                resultBox.className = "result-box layak";
+            } else {
+                resultBox.textContent = "❌ " + result.prediction;
+                resultBox.className = "result-box tidak-layak";
+            }
+
+            document.getElementById('reason-text').innerText = result.reason;
+            document.getElementById('suggestion-text').innerText = `Saran: ${result.suggestion}`;
+            document.getElementById('result-section').style.display = 'block';
+        }
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+
+            // Validasi
+            const predictionResult = document.getElementById('prediction-result').textContent;
+            const reasonText = document.getElementById('reason-text').textContent;
+            const suggestionText = document.getElementById('suggestion-text').textContent;
+
+            if (!predictionResult || !reasonText || !suggestionText) {
+                alert("Pastikan semua data hasil prediksi ditampilkan terlebih dahulu.");
+                return;
+            }
+
+            const doc = new jsPDF();
+
+            // Header
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(18);
+            doc.text("Hasil Prediksi Kelayakan Pinjaman", 105, 15, null, null, "center");
+
+            // Nama
+            const personName = document.getElementById('person_name').value;
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(12);
+            doc.text(`Nama: ${personName}`, 15, 25);
+
+            // Tabel Input Data
+            const inputs = [
+                ["Usia", `${document.getElementById('person_age').value} tahun`],
+                ["Pendapatan Tahunan", `Rp ${parseFloat(document.getElementById('person_income').value).toLocaleString('id-ID')}`],
+                ["Status Rumah", document.getElementById('person_home_ownership').value],
+                ["Lama Bekerja", `${document.getElementById('person_emp_length').value} tahun`],
+                ["Tujuan Pinjaman", document.getElementById('loan_intent').value],
+                ["Jumlah Pinjaman", `Rp ${parseFloat(document.getElementById('loan_amnt').value).toLocaleString('id-ID')}`]
+            ];
+
+            doc.autoTable({
+                startY: 30,
+                head: [['Parameter', 'Nilai']],
+                body: inputs,
+                theme: 'grid',
+                headStyles: { fillColor: [41, 128, 185], textColor: 255 },
+                styles: { fontSize: 10, cellPadding: 2 },
+                alternateRowStyles: { fillColor: [240, 240, 240] },
+            });
+
+            // Hasil Prediksi
+            let y = doc.lastAutoTable.finalY + 10;
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(14);
+            doc.setTextColor(predictionResult.includes("Layak") ? "#28a745" : "#dc3545");
+            doc.text(`Hasil: ${predictionResult}`, 15, y);
+
+            // Alasan dan Saran
+            y += 10;
+            doc.setFont("helvetica", "italic");
+            doc.setTextColor("#000000");
+            doc.text(reasonText, 15, y);
+            y += 10;
+            doc.text(suggestionText, 15, y);
+
+            // Footer
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "italic");
+            doc.text("Dicetak oleh BolehPinjamGak - Simulasi Kelayakan Pinjaman", 15, 285);
+
+            doc.save("hasil_prediksi_kelayakan_pinjaman.pdf");
+        }
+
+        document.getElementById('loanForm').addEventListener('submit', fetchPrediction);
+    </script>
+</body>
+</html>
